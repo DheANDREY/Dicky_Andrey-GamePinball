@@ -10,7 +10,7 @@ public class LauncherController : MonoBehaviour
     public float maxTimeHold;
     public float maxForce;
 
-    private Renderer renderer;
+    private Renderer launcherRenderer;
     private bool isHold;
 
     private void Start()

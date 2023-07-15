@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class paddleController : MonoBehaviour
+public class PaddleController : MonoBehaviour
 {
     public KeyCode input;
     public float springPower;
