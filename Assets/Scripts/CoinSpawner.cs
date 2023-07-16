@@ -42,9 +42,11 @@ public class CoinSpawner : MonoBehaviour
         }
     }
 
+    [SerializeField] private SpawnPointHelper spawnHelper;
+
     private void SpawnCoin()
     {
-        GameObject newCoin = Instantiate(coinPrefab, GetRandomPosition(), Quaternion.identity);
+        GameObject newCoin = Instantiate(coinPrefab, spawnHelper.GetRandomSpawnPoint(), Quaternion.identity);
         coinsCount++;
 
         // Destroy the coin if not hit after a delay
@@ -61,8 +63,5 @@ public class CoinSpawner : MonoBehaviour
         }
     }
 
-    private Vector3 GetRandomPosition()
-    {
-        return new Vector3(Random.Range(-5f, 5.5f), 0.12f, Random.Range(-5.5f, -1f));
-    }
+    
 }

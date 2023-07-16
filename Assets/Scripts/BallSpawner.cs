@@ -5,18 +5,29 @@ using UnityEngine;
 public class BallSpawner : MonoBehaviour
 {
     public GameObject ball;
-    private float posX = 6.22f;
-    private float posY = 0.3f;
-    private float posZ = -6.7f;
+    [SerializeField]private SpawnPointHelper helper;
+
+    private void OnEnable() {
+        Trap.trapSprung += ResetBall;
+    }
+    private void OnDisable() {
+        Trap.trapSprung -= ResetBall;
+    }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject == ball) {
-            //reset points and coins
-            GameManager.Instance.points = 0;
-            GameManager.Instance.coins = 0;
-
-            //spawn ball to starting position
-            ball.transform.position = new Vector3(posX, posY, posZ);
+        if (other.gameObject.GetComponent<BallController>()) {
+            ResetBall();
         }
+    }
+
+    public void ResetBall(){
+        
+        //reset points and coins
+        GameManager.Instance.points = 0;
+        GameManager.Instance.coins = 0;
+
+        //spawn ball to starting position
+        ball.transform.position = helper.GetBallSpawnPoint();
+        ball.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
     }
 }
